@@ -1,5 +1,5 @@
 import AuthRequire from "./services/AuthRequire";
-// import Layout from "./components/Layout";
+import Layout from "./components/Layout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Boarding from "./pages/individual/Boarding";
@@ -17,6 +17,7 @@ export const routes = [
   {
     path: "/",
     guard: AuthRequire,
+    layout: Layout,
     component: <Home />,
   },
   {
@@ -24,10 +25,4 @@ export const routes = [
     guard: AuthRequire,
     component: <Boarding />,
   },
-  // {
-  //   path: "/doc/:docId",
-  //   guard: AuthRequire,
-  //   layout: Layout,
-  //   component: <DocDetail />,
-  // },
 ];
