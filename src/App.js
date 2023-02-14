@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import { login } from "./redux/authSlice";
 import { routes } from "./routes";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -46,6 +47,32 @@ function App() {
           );
         })}
       </Routes>
+      <Toaster
+        toastOptions={{
+          success: {
+            iconTheme: {
+              primary: "white",
+              secondary: "#10B981",
+            },
+            style: {
+              background: "#10B981", // tailwind bg-green-500
+              color: "#FFFFFF",
+              fontSize: "15px",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "white",
+              secondary: "#EF4444",
+            },
+            style: {
+              background: "#EF4444", // tailwind bg-red-500
+              color: "#FFFFFF",
+              fontSize: "15px",
+            },
+          },
+        }}
+      />
     </BrowserRouter>
   );
 }

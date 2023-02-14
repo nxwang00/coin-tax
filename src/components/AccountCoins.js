@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SearchMenu from "./SearchMenu";
-import { setAccounts } from "../../../redux/appsettingSlice";
+import SearchMenu from "./AccountCoinsSearchMenu";
 
 const SEARCH_OPTIONS = [
   { id: 1, title: "All", isSelected: true },
@@ -10,94 +9,17 @@ const SEARCH_OPTIONS = [
   { id: 4, title: "Wallet", isSelected: false },
 ];
 
-const MOCKUP_COINS = [
-  { id: 1, name: "Binance", category: "Exchange", img: "/imgs/binance.webp" },
-  {
-    id: 2,
-    name: "Binance US",
-    category: "Exchange",
-    img: "/imgs/binance.webp",
-  },
-  {
-    id: 3,
-    name: "Binance Smart Chain",
-    category: "Blockchain",
-    img: "/imgs/binance.webp",
-  },
-  { id: 4, name: "Coinbase", category: "Exchange", img: "/imgs/coinbase.png" },
-  {
-    id: 5,
-    name: "Coinbase Pro",
-    category: "Exchange",
-    img: "/imgs/coinbase_pro.png",
-  },
-  {
-    id: 6,
-    name: "Crypto.com",
-    category: "Exchange",
-    img: "/imgs/crypto.webp",
-  },
-  {
-    id: 7,
-    name: "Ethereum",
-    category: "Blockchain",
-    img: "/imgs/ethereum.svg",
-  },
-  {
-    id: 8,
-    name: "Gemini",
-    category: "Blockchain",
-    img: "/imgs/gemini.webp",
-  },
-  {
-    id: 9,
-    name: "Kraken",
-    category: "Exchange",
-    img: "/imgs/kraken.png",
-  },
-  {
-    id: 10,
-    name: "KuCoin",
-    category: "Exchange",
-    img: "/imgs/kucoin.png",
-  },
-  {
-    id: 11,
-    name: "AdaLite",
-    category: "Wallet",
-    img: "/imgs/adalite.webp",
-  },
-  {
-    id: 12,
-    name: "AirGap",
-    category: "Wallet",
-    img: "/imgs/airgap.webp",
-  },
-  {
-    id: 13,
-    name: "Polygon",
-    category: "Blockchain",
-    img: "/imgs/polygon.webp",
-  },
-];
+const AccountCoins = (props) => {
+  const { onSelected, coinList } = props;
 
-const Accounts = (props) => {
-  const { onClicked } = props;
-
-  const dispatch = useDispatch();
-
-  const account = useSelector((state) => state.appsetting.account);
   const [searchMenus, setSearchMenus] = useState(SEARCH_OPTIONS);
   const [searchTxt, setSearchTxt] = useState("");
   const [coins, setCoins] = useState([]);
   const [initCoins, setInitCoins] = useState([]);
 
   useEffect(() => {
-    const updated_coins = MOCKUP_COINS.map((coin) => {
-      return { ...coin, selected: false };
-    });
-    setCoins(updated_coins);
-    setInitCoins(updated_coins);
+    setCoins(coinList);
+    setInitCoins(coinList);
   }, []);
 
   const onSearchMenuClicked = (menuId) => {
@@ -169,41 +91,11 @@ const Accounts = (props) => {
   };
 
   const onCoinClicked = (coin_id) => {
-    const newCoins = coins.map((coin) => {
-      if (coin.id === coin_id) {
-        return { ...coin, selected: !coin.selected };
-      }
-      return coin;
-    });
-    setCoins(newCoins);
-    const newInitCoins = coins.map((coin) => {
-      if (coin.id === coin_id) {
-        return { ...coin, selected: !coin.selected };
-      }
-      return coin;
-    });
-    setInitCoins(newInitCoins);
-  };
-
-  const onBtnClicked = () => {
-    const selectedCoins = initCoins.filter((coin) => coin.selected === true);
-    const accounts = selectedCoins.map((coin, idx) => {
-      return { id: idx + 1, name: coin.name, coin: coin, status: "noconnect" };
-    });
-    dispatch(
-      setAccounts({
-        accounts: accounts,
-      })
-    );
-    onClicked();
+    onSelected(coin_id);
   };
 
   return (
     <div>
-      <h2 className="text-3xl text-center">Which platforms have you used?</h2>
-      <p className="text-gray-500 mt-4 text-center">
-        Select each crypto platform you have used (this can be updated later).
-      </p>
       <div className="relative mt-4">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
@@ -242,33 +134,13 @@ const Accounts = (props) => {
           />
         ))}
       </div>
-      <div className="grid grid-cols-5 gap-8 mt-8">
+      <div className="grid grid-cols-5 gap-8 mt-8 overflow-y-scroll h-96">
         {coins.map((coin) => (
           <div
-            className={`border border-solid ${
-              coin.selected ? "border-blue-400" : "border-gray-200"
-            } m-1 p-8 relative cursor-pointer`}
+            className="border border-solid border-gray-200 m-1 p-8 h-36 relative cursor-pointer"
             key={coin.id}
             onClick={() => onCoinClicked(coin.id)}
           >
-            {coin.selected && (
-              <div className="absolute top-0 right-0 bg-blue-200 m-1 p-1 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-              </div>
-            )}
             <img
               className="xs:mx-auto object-contain xs:mt-6 w-12 h-12 border border-gray-300 rounded-full mx-auto"
               src={coin.img}
@@ -278,29 +150,8 @@ const Accounts = (props) => {
           </div>
         ))}
       </div>
-      <button
-        type="button"
-        className="mt-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={onBtnClicked}
-      >
-        Continue
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-5 h-5 ml-1"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-          />
-        </svg>
-      </button>
     </div>
   );
 };
 
-export default Accounts;
+export default AccountCoins;

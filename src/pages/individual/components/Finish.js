@@ -1,7 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CompleteImg from "../../../assets/imgs/complete.svg";
-import { setAccount } from "../../../redux/appsettingSlice";
+import {
+  setAccount,
+  setSelectedAccountId,
+} from "../../../redux/appsettingSlice";
 
 const Finish = (props) => {
   const { onClicked } = props;
@@ -9,6 +12,7 @@ const Finish = (props) => {
   const dispatch = useDispatch();
 
   const account = useSelector((state) => state.appsetting.account);
+  const accounts = useSelector((state) => state.appsetting.accounts);
 
   const onBtnClicked = () => {
     // submit the account data to the server with api endpoint
@@ -17,6 +21,11 @@ const Finish = (props) => {
     dispatch(
       setAccount({
         account: accountData,
+      })
+    );
+    dispatch(
+      setSelectedAccountId({
+        selectedAccountId: accounts[0]?.id || null,
       })
     );
     onClicked();

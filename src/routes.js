@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Boarding from "./pages/individual/Boarding";
-import Home from "./pages/Home";
+import Home from "./pages/home";
 
 export const routes = [
   {

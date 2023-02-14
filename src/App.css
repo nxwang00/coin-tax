@@ -42,3 +42,33 @@
   width: 5px;
   height: 0px;
 }
+
+.reactModal {
+  border-radius: 5px;
+  width: 25%;
+}
+
+.middleModal {
+  border-radius: 5px;
+  width: 100% !important;
+  max-width: 1000px !important;
+}
+
+.fullModal {
+  max-width: 1100px !important;
+  width: 100% !important;
+}
+
+.react-responsive-modal-overlay,
+.react-responsive-modal-container,
+.react-responsive-modal-modal {
+  animation-fill-mode: forwards !important;
+}
+
+input.react-datetime-picker__inputGroup__input {
+  padding: 0px !important;
+}
+
+div.react-datetime-picker__wrapper {
+  border: none !important;
+}
