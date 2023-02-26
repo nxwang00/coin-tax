@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { logout } from "../redux/authSlice";
 import UserDefaultAvatar from "../assets/imgs/user_default_avatar.png";
 
 const Topbar = () => {
   const ref = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user);
 
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState(0);
 
   useEffect(() => {
     document.addEventListener("mousedown", Clickout);
@@ -34,6 +36,19 @@ const Topbar = () => {
     window.sessionStorage.clear();
   };
 
+  const onMenuClick = (menuTitle) => {
+    if (menuTitle === "import") {
+      setCurrentMenu(0);
+      navigate("/");
+    } else if (menuTitle === "review") {
+      setCurrentMenu(1);
+      navigate("/review");
+    } else if (menuTitle === "reports") {
+      setCurrentMenu(2);
+      navigate("/reports");
+    }
+  };
+
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 py-2.5 pr-16 pl-14 shadow-sm">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
@@ -54,29 +69,34 @@ const Topbar = () => {
           >
             <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <Link
-                  to="/"
-                  className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                  aria-current="page"
+                <span
+                  className={`block p-0 cursor-pointer ${
+                    currentMenu === 0 ? "text-blue-700" : "hover:text-blue-700"
+                  }`}
+                  onClick={() => onMenuClick("import")}
                 >
                   Import
-                </Link>
+                </span>
               </li>
               <li>
-                <Link
-                  to="/"
-                  className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                <span
+                  className={`block p-0 cursor-pointer ${
+                    currentMenu === 1 ? "text-blue-700" : "hover:text-blue-700"
+                  }`}
+                  onClick={() => onMenuClick("review")}
                 >
                   Review
-                </Link>
+                </span>
               </li>
               <li>
-                <Link
-                  to="/"
-                  className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                <span
+                  className={`block p-0 cursor-pointer ${
+                    currentMenu === 2 ? "text-blue-700" : "hover:text-blue-700"
+                  }`}
+                  onClick={() => onMenuClick("reports")}
                 >
                   Tax Reports
-                </Link>
+                </span>
               </li>
             </ul>
           </div>

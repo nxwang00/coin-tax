@@ -4,6 +4,8 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Boarding from "./pages/individual/Boarding";
 import Home from "./pages/home";
+import Review from "./pages/review";
+import Reports from "./pages/reports";
 
 export const routes = [
   {
@@ -19,6 +21,18 @@ export const routes = [
     guard: AuthRequire,
     layout: Layout,
     component: <Home />,
+  },
+  {
+    path: "/review",
+    guard: AuthRequire,
+    layout: Layout,
+    component: <Review />,
+  },
+  {
+    path: "/reports",
+    guard: AuthRequire,
+    layout: Layout,
+    component: <Reports />,
   },
   {
     path: "/individual/onboarding",

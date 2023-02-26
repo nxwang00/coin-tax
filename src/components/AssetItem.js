@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { MOCKUP_ASSETTYPES } from "../../../services/mockus";
+import { MOCKUP_ASSETTYPES } from "../services/mockus";
 
 const AssetItem = (props) => {
   const { item, onClose } = props;

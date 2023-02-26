@@ -10,7 +10,7 @@ import {
 } from "date-fns";
 import EmptyState from "../../../assets/imgs/empty_state.svg";
 import { MOCKUP_TRANSACTIONS } from "../../../services/mockus";
-import EditTransactionModal from "./EditTransactionModal";
+import EditTransactionModal from "../../../components/EditTransactionModal";
 
 const Transactions = (props) => {
   const { connected } = props;

@@ -9,7 +9,7 @@ import {
   MOCKUP_SEND_ASSETS,
   MOCKUP_RECEIVE_ASSETS,
   MOCKUP_FEE_ASSETS,
-} from "../../../services/mockus";
+} from "../services/mockus";
 import AssetAccordion from "./AssetAccordion";
 
 const EditTransactionModal = (props) => {

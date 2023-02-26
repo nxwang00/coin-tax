@@ -18,8 +18,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Topbar />
-      <Navbar />
-      <div className="mx-12 mt-20">{children}</div>
+      <div className="mx-12">{children}</div>
     </div>
   );
 };
