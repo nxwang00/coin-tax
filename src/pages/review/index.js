@@ -1,8 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
-import Accordion from "react-accordion-comp";
-import "react-accordion-comp/dist/styles.css";
+import React, { Fragment, useState } from "react";
 import Sidebar from "../../components/Sidebar";
-import MissingCost from "./components/MissingCost";
+import MissingCost from "../../components/MissingCost";
 import ReviewList from "./components/ReviewList";
 
 const Review = () => {

@@ -6,6 +6,7 @@ import Boarding from "./pages/individual/Boarding";
 import Home from "./pages/home";
 import Review from "./pages/review";
 import Reports from "./pages/reports";
+import Unlock from "./pages/unlock";
 
 export const routes = [
   {
@@ -33,6 +34,11 @@ export const routes = [
     guard: AuthRequire,
     layout: Layout,
     component: <Reports />,
+  },
+  {
+    path: "/unlock",
+    guard: AuthRequire,
+    component: <Unlock />,
   },
   {
     path: "/individual/onboarding",

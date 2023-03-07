@@ -344,3 +344,94 @@ export const MOCKUP_FEE_ASSETS = [
     historical_value: "8.083",
   },
 ];
+
+export const MOCKUP_REPORTS = [
+  {
+    id: "1",
+    year: "2023",
+    calculation: { method: "HIFO", transactions: "721" },
+    capital_gains: [
+      { label: "Short Term", amount: "30.00" },
+      { label: "Long Term", amount: "0.00" },
+      { label: "Total", amount: "30.00" },
+    ],
+    others: [
+      { label: "Tax Loss Harvesting" },
+      { label: "End of Year Position" },
+      { label: "Missing Basis Reconciliation" },
+    ],
+    taxable_income: [
+      { label: "Airdrop", amount: "0.00" },
+      { label: "Interest", amount: "0.00" },
+      { label: "Mining", amount: "0.00" },
+      { label: "Staking", amount: "0.00" },
+      { label: "Income", amount: "0.00" },
+      { label: "Other", amount: "0.00" },
+      { label: "Total", amount: "0.00" },
+    ],
+  },
+  {
+    id: "2",
+    year: "2022",
+    calculation: { method: "HIFO", transactions: "11" },
+    capital_gains: [
+      { label: "Short Term", amount: "13.00" },
+      { label: "Long Term", amount: "20.00" },
+      { label: "Total", amount: "33.00" },
+    ],
+    others: [
+      { label: "End of Year Position" },
+      { label: "Missing Basis Reconciliation" },
+    ],
+    taxable_income: [
+      { label: "Airdrop", amount: "0.00" },
+      { label: "Interest", amount: "0.00" },
+      { label: "Mining", amount: "0.00" },
+      { label: "Staking", amount: "0.00" },
+      { label: "Income", amount: "0.00" },
+      { label: "Other", amount: "0.00" },
+      { label: "Total", amount: "0.00" },
+    ],
+  },
+];
+
+export const MOCKUP_PROFESSIONALS = [
+  { id: "1", name: "Liam" },
+  { id: "2", name: "Noah" },
+  { id: "3", name: "Oliver" },
+  { id: "4", name: "William" },
+  { id: "5", name: "Elijah" },
+];
+
+export const MOCKUP_CHAT_MSGS = [
+  {
+    id: "1",
+    msg: "How often should i take the medicine?",
+    type: "received",
+    time: "01:25",
+  },
+  {
+    id: "2",
+    msg: "Twice a day, at breakfast and before bed",
+    type: "sent",
+    time: "02:32",
+  },
+  {
+    id: "3",
+    msg: "Thanks a lot doc",
+    type: "received",
+    time: "05:42",
+  },
+  {
+    id: "4",
+    msg: "Thats my duty, mention not",
+    type: "sent",
+    time: "05:44",
+  },
+  {
+    id: "5",
+    msg: "sorry to bother again but can i ask you one more favour?",
+    type: "received",
+    time: "11:14",
+  },
+];
